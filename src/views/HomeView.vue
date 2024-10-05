@@ -60,9 +60,14 @@ const onClickCreatePath = async () => {
   try {
     const plan = await PlanService.getPlan(from.value, to.value)
 
-    var polyline = L.polyline(plan[0].path, { color: plan[0].color }).addTo(map)
+    plan.forEach((path) => {
+      L.polyline(path.path, { color: path.color, opacity: '0.5' })
+        .bindPopup(`Duration: ${path.total_duration_s}`)
+        .openPopup()
+        .addTo(map)
+    })
 
-    map.fitBounds(polyline.getBounds())
+    map.fitBounds(L.polyline(plan[0].path).getBounds())
   } catch (e) {
     console.error(e)
   }
@@ -85,7 +90,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 #map {
-  height: 30rem;
+  height: 75vh;
 }
 
 .home-view {
