@@ -10,7 +10,7 @@ export default class PlanService {
     return planMocks
   }
 
-  public static getPlanErrors = (from: string, to: string): ErrorApiPlan => {
+  public static getPlanErrors = async (from: string, to: string): Promise<ErrorApiPlan> => {
     console.log(`https://api.backend.com/plan?from=${from}&to=${to}`)
 
     return ErrorMocks[0]

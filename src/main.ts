@@ -10,6 +10,8 @@ import Aura from '@primevue/themes/aura'
 import Button from 'primevue/button'
 import FloatLabel from 'primevue/floatlabel'
 import InputText from 'primevue/inputtext'
+import Toast from 'primevue/toast'
+import ToastService from 'primevue/toastservice'
 
 createApp(App)
   .use(router)
@@ -24,4 +26,6 @@ createApp(App)
   .component('Button', Button)
   .component('FloatLabel', FloatLabel)
   .component('InputText', InputText)
+  .component('Toast', Toast)
+  .use(ToastService)
   .mount('#app')

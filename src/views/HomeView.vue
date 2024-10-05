@@ -1,5 +1,7 @@
 <template>
   <div class="home-view">
+    <Toast />
+
     <h1>Calculate your path</h1>
 
     <div class="home-view__filters">
@@ -16,6 +18,13 @@
       </div>
 
       <Button label="Calculate my path" icon="pi pi-compass" />
+
+      <Button
+        label="Generate error"
+        severity="danger"
+        icon="pi pi-times-circle"
+        @click="onClickError"
+      />
     </div>
 
     <div id="map" />
@@ -25,11 +34,16 @@
 <script setup lang="ts">
 import { onMounted, ref, type Ref } from 'vue'
 
+import { useToast } from 'primevue/usetoast'
+
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import PlanService from '@/services/plan'
 
 const from: Ref<string> = ref('')
 const to: Ref<string> = ref('')
+
+const toast = useToast()
 
 const setupMap = () => {
   const map = L.map('map').setView([45.76342, 4.834277], 13)
@@ -40,6 +54,15 @@ const setupMap = () => {
     subdomains: 'abcd',
     maxZoom: 20
   }).addTo(map)
+}
+
+const onClickError = async () => {
+  try {
+    const error = await PlanService.getPlanErrors(from.value, to.value)
+    toast.add({ severity: 'error', summary: 'Error message', detail: error.error, life: 3000 })
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 onMounted(() => {
