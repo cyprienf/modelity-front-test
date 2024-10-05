@@ -10,6 +10,6 @@ import { RouterView } from 'vue-router'
 
 <style scoped lang="scss">
 #app {
-  padding: 2rem;
+  padding: $spacing-xlarge;
 }
 </style>

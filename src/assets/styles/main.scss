@@ -1,4 +1,7 @@
+@import './_variables.scss';
+
 @import 'primeicons/primeicons.css';
+
 
 html {
   font-family:
@@ -13,5 +16,5 @@ html {
     Apple Color Emoji,
     Segoe UI Emoji,
     Segoe UI Symbol;
-  font-size: 14px;
+  font-size: 0.875rem;
 }

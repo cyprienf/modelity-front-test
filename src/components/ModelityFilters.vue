@@ -22,6 +22,6 @@ const to: ModelRef<string | undefined> = defineModel('to')
 <style scoped lang="scss">
 .modelity-filters {
   display: flex;
-  gap: 0.5rem;
+  gap: $spacing-xsmall;
 }
 </style>

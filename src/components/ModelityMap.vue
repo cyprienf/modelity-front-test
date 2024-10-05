@@ -103,9 +103,9 @@ onMounted(() => {
 .modelity-map {
   &__buttons {
     display: flex;
-    gap: 0.5rem;
+    gap: $spacing-xsmall;
 
-    margin: 1rem 0;
+    margin: $spacing-medium 0;
   }
 }
 </style>
