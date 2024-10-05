@@ -9,6 +9,10 @@
         icon="pi pi-times-circle"
         @click="onClickError"
       />
+
+      <Message v-if="errorMessage" severity="error">
+        {{ errorMessage }}
+      </Message>
     </div>
 
     <div id="map" />
@@ -16,13 +20,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 
 import { useToast } from 'primevue/usetoast'
 
 import PlanService from '@/services/plan'
 
-import L from 'leaflet'
+import L, { Map } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
 const toast = useToast()
@@ -32,7 +36,8 @@ const props = defineProps<{
   to: string
 }>()
 
-let map: any
+const errorMessage: Ref<string> = ref('')
+let map: Map
 
 const setupMap = () => {
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
@@ -44,13 +49,10 @@ const setupMap = () => {
 }
 
 const onClickCreatePath = async () => {
+  errorMessage.value = ''
+
   if (!props.from || !props.to) {
-    toast.add({
-      severity: 'error',
-      summary: 'Error message',
-      detail: 'Please enter start and destination addresses',
-      life: 3000
-    })
+    errorMessage.value = 'Please enter start and destination addresses'
 
     return
   }
@@ -59,7 +61,7 @@ const onClickCreatePath = async () => {
     const plan = await PlanService.getPlan(props.from, props.to)
 
     plan.forEach((path) => {
-      L.polyline(path.path, { color: path.color, opacity: '0.5' })
+      L.polyline(path.path, { color: path.color, opacity: 0.5 })
         .bindPopup(`Duration: ${path.total_duration_s} seconds`)
         .openPopup()
         .addTo(map)

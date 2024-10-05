@@ -1,11 +1,11 @@
 <template>
   <div class="modelity-filters">
-    <FloatLabel>
+    <FloatLabel data-test="modelity-filters-from">
       <InputText id="from" type="text" v-model="from" :invalid="from === null" />
       <label for="from">Start</label>
     </FloatLabel>
 
-    <FloatLabel>
+    <FloatLabel data-test="modelity-filters-to">
       <InputText id="to" v-model="to" :invalid="to === null" />
       <label for="to">Destination</label>
     </FloatLabel>

@@ -2,11 +2,11 @@
   <div class="home-view">
     <Toast />
 
-    <h1 class="home-view__title">Modelity path finder</h1>
+    <h1 class="home-view__title" data-test="home-view-title">Modelity path finder</h1>
 
-    <ModelityFilters v-model:from="from" v-model:to="to" />
+    <ModelityFilters data-test="home-view-filters" v-model:from="from" v-model:to="to" />
 
-    <ModelityMap :from :to />
+    <ModelityMap :from :to data-test="home-view-map" />
   </div>
 </template>
 
