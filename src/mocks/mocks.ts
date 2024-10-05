@@ -30,5 +30,5 @@ const firstErrorPlan: ErrorApiPlan = {
   error: 'An error has occurred, please try again later'
 }
 
-export const ErrorMocks: ErrorApiPlan[] = [firstErrorPlan]
+export const errorMocks: ErrorApiPlan[] = [firstErrorPlan]
 export const planMocks: ApiPlan[] = [firstPlan, secondPlan]
