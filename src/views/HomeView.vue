@@ -17,7 +17,7 @@
         </FloatLabel>
       </div>
 
-      <Button label="Calculate my path" icon="pi pi-compass" />
+      <Button label="Calculate my path" icon="pi pi-compass" @click="onClickCreatePath" />
 
       <Button
         label="Generate error"
@@ -45,15 +45,27 @@ const to: Ref<string> = ref('')
 
 const toast = useToast()
 
-const setupMap = () => {
-  const map = L.map('map').setView([45.76342, 4.834277], 13)
+let map: any
 
+const setupMap = () => {
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 20
   }).addTo(map)
+}
+
+const onClickCreatePath = async () => {
+  try {
+    const plan = await PlanService.getPlan(from.value, to.value)
+
+    var polyline = L.polyline(plan[0].path, { color: plan[0].color }).addTo(map)
+
+    map.fitBounds(polyline.getBounds())
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 const onClickError = async () => {
@@ -66,6 +78,7 @@ const onClickError = async () => {
 }
 
 onMounted(() => {
+  map = L.map('map').setView([45.76342, 4.834277], 13)
   setupMap()
 })
 </script>
