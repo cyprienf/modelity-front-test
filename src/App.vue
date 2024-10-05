@@ -1,9 +1,15 @@
 <template>
-  <RouterView />
+  <div id="app">
+    <RouterView />
+  </div>
 </template>
 
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+#app {
+  padding: 2rem;
+}
+</style>
