@@ -13,8 +13,10 @@ npm run dev
 npm run test:unit
 ```
 
+The app has been publish on Netlify [here](https://modelity-front-test.netlify.app/)
+
 ## Roadmap
 
-[] Make the app responsive
-[] Improve UI/UX
-[] Add better tests (unit and e2e)
+- [] Make the app responsive
+- [] Improve UI/UX
+- [] Add better tests (unit and e2e)
